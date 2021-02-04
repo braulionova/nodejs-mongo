@@ -1,0 +1,52 @@
+<%- include('partials/_header'); -%>
+
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="title" placeholder="inserta un titulo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="description" id="" cols="80" class="form-control" placeholder="Inserta una descripción."></textarea>
+                            </div>
+                            <div class="d-grid gap-2">
+                               <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Titulo</th>
+                            <th>Descripción</th>
+                            <th>Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < tasks.length; i++){ %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= tasks[i].title %></td>
+                                <td><%= tasks[i].description %></td>
+                                <td>
+                                    <a href="/turn/<%= tasks[i]._id %>" class="btn <%= tasks[i].status ? 'btn-success' :  'btn-dark' %> ">Done</a>
+                                    <a href="/delete/<%= tasks[i]._id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/edit/<%= tasks[i]._id %>" class="btn btn-info">Edit</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/_footer'); -%>
